@@ -1,342 +1,166 @@
-        :root {
-            --primary-color: #5D5CDE;
-            --text-color: #333;
-            --background-color: #FFFFFF;
-            --card-bg: #f8f8f8;
-            --card-border: #e0e0e0;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --popup-bg: #fff;
-        }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Zone Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<style>
+/* ---------- CORE VARIABLES ---------- */
+:root{
+  --primary:#5D5CDE;
+  --text:#333;
+  --bg:#FFFFFF;
+  --card:#f8f8f8;
+  --border:#e0e0e0;
+  --shadow:rgba(0,0,0,.1);
+  --radius:8px;
+  --trans:.25s cubic-bezier(.4,0,.2,1);
+  font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+}
+/* ---------- DARK THEME ---------- */
+.dark{
+  --primary:#1DB954;               /* Spotify green */
+  --text:#e0e0e0;
+  --bg:#121212;
+  --card:#181818;
+  --border:#282828;
+  --shadow:rgba(0,0,0,.4);
+}
+/* ---------- GLOBAL ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);transition:background var(--trans),color var(--trans);line-height:1.5}
+img{max-width:100%;display:block}
+/* ---------- HEADER ---------- */
+header{position:sticky;top:0;z-index:100;background:var(--primary);color:#fff;padding:.75rem 1.25rem;box-shadow:0 2px 6px var(--shadow)}
+.header-content{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:auto}
+.logo{font-size:1.5rem;font-weight:700;letter-spacing:-.5px}
+.search-container{display:flex;gap:.75rem;width:100%;max-width:420px}
+#searchBar,#sortOptions{flex:1 1 auto;padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--radius);font-size:1rem;background:var(--card);color:var(--text);transition:border-color var(--trans)}
+#searchBar:focus,#sortOptions:focus{outline:none;border-color:var(--primary)}
+.control-buttons{display:flex;gap:.5rem}
+button{cursor:pointer;border:none;background:transparent;color:inherit;font-size:1.1rem;padding:.4rem;border-radius:50%;transition:background var(--trans)}
+button:hover{background:rgba(255,255,255,.15)}
+#darkToggle{font-size:1.3rem}
+/* ---------- GRID ---------- */
+main{max-width:1200px;margin:auto;padding:1.25rem}
+#zoneCount{font-size:.9rem;margin:.5rem 0;color:var(--text);opacity:.7}
+#container{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.25rem}
+/* ---------- CARD ---------- */
+.zone-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;box-shadow:0 2px 4px var(--shadow);transition:transform var(--trans),box-shadow var(--trans),background var(--trans)}
+.zone-item:hover{transform:translateY(-4px);box-shadow:0 6px 14px var(--shadow)}
+.zone-item img{width:100%;aspect-ratio:1;object-fit:cover}
+.zone-item button{width:100%;height:56px;font-weight:600;font-size:.95rem;background:transparent;color:var(--text);display:flex;align-items:center;justify-content:center;text-align:center;padding:.5rem}
+/* ---------- VIEWER ---------- */
+#zoneViewer{position:fixed;inset:0;background:var(--bg);z-index:1000;display:none;flex-direction:column}
+.zone-header{display:flex;align-items:center;justify-content:space-between;background:var(--primary);color:#fff;padding:.6rem 1rem}
+.zone-title{flex:1}
+#zoneName{font-size:1.1rem;font-weight:600}
+#zoneAuthor{font-size:.8rem;opacity:.85;text-decoration:none}
+#zoneAuthor:hover{text-decoration:underline}
+.zone-controls{display:flex;gap:.5rem}
+.zone-controls button{border:1px solid rgba(255,255,255,.4);font-size:.8rem;padding:.4rem .6rem;border-radius:var(--radius)}
+.zone-controls button:hover{background:rgba(255,255,255,.1)}
+#zoneFrame{flex:1;border:none;width:100%}
+/* ---------- POPUP ---------- */
+#popupOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:2000}
+.popup{width:90%;max-width:480px;background:var(--card);border-radius:var(--radius);box-shadow:0 8px 24px var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.popup-header{background:var(--primary);color:#fff;padding:.75rem 1rem;display:flex;justify-content:space-between;align-items:center}
+#popupClose{font-size:1.5rem;line-height:1}
+#popupBody{padding:1rem;color:var(--text)}
+#popupBody input[type=text],#popupBody input[type=file]{width:100%;padding:.55rem;margin-bottom:.75rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:1rem}
+#settings-button{width:100%;padding:.6rem;background:var(--primary);color:#fff;border-radius:var(--radius);font-size:1rem;margin-bottom:.75rem}
+/* ---------- FOOTER ---------- */
+footer{background:var(--card);border-top:1px solid var(--border);margin-top:2rem;padding:1rem;text-align:center;font-size:.85rem}
+.footer-links{display:flex;justify-content:center;gap:1rem;margin-top:.5rem}
+.footer-links a{color:var(--primary);text-decoration:none}
+.footer-links a:hover{text-decoration:underline}
+/* ---------- MOBILE ---------- */
+@media(max-width:768px){
+  .header-content{flex-direction:column;gap:.75rem}
+  .search-container{width:100%}
+  #container{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="logo">Zone Hub</div>
+    <div class="search-container">
+      <input id="searchBar" type="text" placeholder="Search zones…"/>
+      <select id="sortOptions">
+        <option>Sort by name</option>
+        <option>Sort by date</option>
+      </select>
+    </div>
+    <div class="control-buttons">
+      <button id="darkToggle" title="Toggle theme">🌙</button>
+      <button id="settings" title="Settings">⚙️</button>
+    </div>
+  </div>
+</header>
 
-        .dark-mode {
-            --primary-color: #6e6df0;
-            --text-color: #e0e0e0;
-            --background-color: #181818;
-            --card-bg: #252525;
-            --card-border: #383838;
-            --shadow: rgba(0, 0, 0, 0.4);
-            --popup-bg: #252525;
-        }
+<main>
+  <div id="zoneCount">12 zones</div>
+  <div id="container">
+    <!-- your existing .zone-item cards here -->
+  </div>
+</main>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-        }
+<footer>
+  <div class="footer-links">
+    <a href="#">About</a><a href="#">GitHub</a><a href="#">Report</a>
+  </div>
+</footer>
 
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px var(--shadow);
-        }
+<!-- (viewer / popup markup stays identical) -->
+<div id="zoneViewer">
+  <div class="zone-header">
+    <div class="zone-title">
+      <p id="zoneName">Zone</p>
+      <a id="zoneAuthor" href="#">Author</a>
+      <span id="zoneId" hidden></span>
+    </div>
+    <div class="zone-controls">
+      <button onclick="history.back()">← Back</button>
+    </div>
+  </div>
+  <iframe id="zoneFrame"></iframe>
+</div>
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+<div id="popupOverlay">
+  <div class="popup">
+    <div class="popup-header">
+      <h3 id="popupTitle">Settings</h3>
+      <button id="popupClose">&times;</button>
+    </div>
+    <div id="popupBody">
+      <button id="settings-button">Export zones</button>
+      <input type="text" placeholder="Import string (JSON)">
+      <input type="file" accept=".json">
+    </div>
+  </div>
+</div>
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .search-container {
-            display: flex;
-            gap: 10px;
-            margin: 0.5rem 0;
-        }
-
-        #searchBar {
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--card-border);
-            flex-grow: 1;
-            min-width: 0;
-            font-size: 16px;
-        }
-
-        #sortOptions {
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--card-border);
-            font-size: 16px;
-        }
-
-        .control-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        #settings {
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-
-        #container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-            margin-top: 1rem;
-        }
-
-        .zone-item {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 2px 4px var(--shadow);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .zone-item:hover {
-            background-color: var(--card-border);
-        }
-
-        .zone-item img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-        }
-
-        .zone-item button {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            flex-grow: 1;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        #zoneViewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--background-color);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .zone-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.5rem 1rem;
-        }
-
-        .zone-title {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #zoneName {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        #zoneId {
-            display: none;
-        }
-
-        #zoneAuthor {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-        }
-
-        #zoneAuthor:hover {
-            text-decoration: underline;
-        }
-
-        .zone-controls {
-            display: flex;
-            gap: 10px;
-        }
-
-        .zone-controls button {
-            background-color: transparent;
-            border: 1px solid white;
-            color: white;
-            padding: 0.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .zone-controls button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        #zoneFrame {
-            flex-grow: 1;
-            border: none;
-            width: 100%;
-            height: 100%;
-        }
-
-        #popupOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
-
-        .popup {
-            background-color: var(--popup-bg);
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .popup-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.8rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #popupTitle {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        #popupClose {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        #popupBody {
-            padding: 1rem;
-            overflow-y: auto;
-            color: var(--text-color);
-        }
-
-        #popupBody input[type="text"],
-        #popupBody input[type="file"] {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--card-border);
-            border-radius: 4px;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            font-size: 16px;
-        }
-
-        #settings-button {
-            display: block;
-            width: 100%;
-            padding: 0.75rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-bottom: 1rem;
-        }
-
-        footer {
-            background-color: var(--card-bg);
-            padding: 1rem;
-            text-align: center;
-            margin-top: 2rem;
-            border-top: 1px solid var(--card-border);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .footer-links a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        #zoneCount {
-            margin: 0.5rem 0;
-            font-size: 0.9rem;
-            color: var(--text-color);
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .search-container {
-                width: 100%;
-            }
-
-            #container {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 15px;
-            }
-
-            .zone-item img {
-                height: 140px;
-            }
-
-            .zone-item button {
-                height: 60px;
-                font-size: 14px;
-            }
-        }
+<script>
+/* ---------- THEME LOGIC ---------- */
+const btn = document.getElementById('darkToggle');
+const body = document.body;
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const stored = localStorage.getItem('dark');
+if (stored ? stored==='true' : prefersDark) body.classList.add('dark');
+btn.textContent = body.classList.contains('dark')?'☀️':'🌙';
+btn.addEventListener('click',()=>{
+  body.classList.toggle('dark');
+  localStorage.setItem('dark',body.classList.contains('dark'));
+  btn.textContent = body.classList.contains('dark')?'☀️':'🌙';
+});
+/* ---------- POPUP HANDLER ---------- */
+const overlay = document.getElementById('popupOverlay');
+document.getElementById('settings').onclick = ()=> overlay.style.display='flex';
+document.getElementById('popupClose').onclick = ()=> overlay.style.display='none';
+overlay.onclick = e=> {if(e.target===overlay) overlay.style.display='none'};
+/* (wire up your search/sort/container render logic below) */
+</script>
+</body>
+</html>

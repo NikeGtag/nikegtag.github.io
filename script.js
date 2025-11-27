@@ -4,7 +4,7 @@
         const searchBar = document.getElementById('searchBar');
         const sortOptions = document.getElementById('sortOptions');
         // https://www.jsdelivr.com/tools/purge
-        const zonesURL = "https://cdn.jsdelivr.net/gh/gn-math/assets@main/zones.json";
+        const zonesURL = "https://cdn.jsdelivr.net/gh/NikeGtag/data@main/README.md";
         const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
         const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
         let zones = [];
@@ -297,4 +297,5 @@
         function closePopup() {
             document.getElementById('popupOverlay').style.display = "none";
         }
+
         listZones();

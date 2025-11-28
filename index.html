@@ -1,142 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        window.addEventListener('beforeunload', function (event) {
-            event.preventDefault();
-            event.returnValue = '';
-            return 'Are you sure you want to leave? Any unsaved changes will be lost.';
-        });
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gn-math</title>
+  <link rel="icon" href="favicon.png" />
 
-    <!-- YOUR REAL ADSENSE -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1037091401823825"
-         crossorigin="anonymous"></script>
+  <!-- SEO / Social (you can tweak these later) -->
+  <meta name="description" content="Fast unblocked games for school — Crazy Cattle 3D, Drive Mad and more." />
+  <meta property="og:title" content="gn-math — unblocked games" />
+  <meta property="og:description" content="Play Crazy Cattle 3D and hundreds of other games instantly — no downloads, no blocks." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://gn-math.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WX5VS54ZDW"></script>
-    <meta name="google-adsense-account" content="ca-pub-1037091401823825">
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-WX5VS54ZDW');
-    </script>
+  <!-- AdSense + Analytics (your real IDs) -->
+  <meta name="google-adsense-account" content="ca-pub-1037091401823825">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1037091401823825"
+          crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WX5VS54ZDW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WX5VS54ZDW');
+  </script>
 
-    <script async src="https://fundingchoicesmessages.google.com/i/pub-1037091401823825?ers=1"></script>
-    <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;display:none;'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+  <!-- Funding Choices (EU consent) -->
+  <script async src="https://fundingchoicesmessages.google.com/i/pub-1037091401823825?ers=1"></script>
+  <script>(function () { function signalGooglefcPresent() { if (!window.frames['googlefcPresent']) { if (document.body) { const iframe = document.createElement('iframe'); iframe.style = 'width:0;height:0;border:none;z-index:-1000;position:absolute'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe); } else { setTimeout(signalGooglefcPresent, 0); } } } signalGooglefcPresent(); })();</script>
 
-    <script src="https://cdn.jsdelivr.net/gh/gn-math/gn-math.github.io@main/gnmath.js"></script>
+  <!-- gn-math core script -->
+  <script src="https://cdn.jsdelivr.net/gh/gn-math/gn-math.github.io@main/gnmath.js" defer></script>
 
-    <meta charset="UTF-8">
-    <link rel="icon" href="favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gn-math</title>
-    <meta name="title" content="just some homework">
-    <meta name="description" content="dont show anyone this">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://gn-math.github.io/">
-    <meta property="og:title" content="homework">
-    <meta property="og:description" content="im very sleepy lol">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://gn-math.github.io/">
-    <meta name="twitter:title" content="GN-Math">
-    <meta name="twitter:description" content="Play unbl*cked games like Crazy Cattle 3D and DriveMad on GN-Math. Fast, free, no downloads—perfect for school or home.">
-    <meta name="keywords" content="unblocked games, games for school, browser games, chromebook games, no download games, html5 games, free unblocked games, gn-math, fun games at school, crazy cattle 3d, play crazy cattle 3d, crazy cattle 3d unblocked, crazy cattle, crazy cattle unblocked, play crazy cattle, crazy cattle online, crazy cattle 3d online">
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body class="dark-mode">
 
-    <!-- PASSWORD GATE (unchanged) -->
-    <div id="passwordGate" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--background-color);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:sans-serif;">
-        <div style="background:var(--card-bg);padding:2.5rem;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.5);text-align:center;border:2px solid var(--primary-color);max-width:90%;">
-            <h2 style="margin:0 0 1.5rem 0;color:var(--text-color);font-size:1.8rem;">Password Required</h2>
-            <input type="password" id="passwordInput" placeholder="enter password" autofocus autocomplete="off" style="padding:1rem;width:260px;font-size:1.2rem;border-radius:8px;border:2px solid var(--card-border);background:var(--popup-bg);color:var(--text-color);text-align:center;" onkeydown="if(event.key==='Enter')checkPw()">
-            <br><br>
-            <button onclick="checkPw()" style="padding:1rem 2.5rem;background:var(--primary-color);color:white;border:none;border-radius:8px;cursor:pointer;font-size:1.3rem;font-weight:bold;transition:0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Enter</button>
-            <p style="margin-top:1rem;font-size:0.9rem;color:#aaa;">this site is made by nikegtag<br>all rights reserved.</p>
-        </div>
+  <!-- PASSWORD GATE -->
+  <div id="passwordGate">
+    <div class="gate-box">
+      <h2>Password Required</h2>
+      <input type="password" id="passwordInput" placeholder="enter password" autofocus autocomplete="off"
+             onkeydown="if(event.key==='Enter')checkPw()" />
+      <button onclick="checkPw()">Enter</button>
+      <p>this site is made by nikegtag<br>all rights reserved.</p>
     </div>
+  </div>
 
-    <script>
+  <script>
     function checkPw() {
-        if (document.getElementById('passwordInput').value.trim() === 'DrPepper') {
-            document.getElementById('passwordGate').remove();
-        } else {
-            alert('Wrong password');
-            document.getElementById('passwordInput').value = '';
-            document.getElementById('passwordInput').focus();
-        }
+      if (document.getElementById('passwordInput').value.trim() === 'DrPepper') {
+        document.getElementById('passwordGate').remove();
+      } else {
+        alert('Wrong password');
+        document.getElementById('passwordInput').value = '';
+      }
     }
-    </script>
+  </script>
 
-    <header>
-        <div class="header-content">
-            <div class="logo">homework bro bro</div>
-            <div class="search-container">
-                <input type="text" id="searchBar" placeholder="Search games..." oninput="filterZones()">
-                <select id="sortOptions" onchange="sortZones()">
-                    <option value="popular">Popular</option>
-                    <option value="name">Name</option>
-                    <option value="id">ID</option>
-                </select>
-            </div>
-            <div class="control-buttons">
-                <button id="settings" style="background-color: var(--primary-color); color: white; border: none; border-radius: 4px; padding: 0.5rem 1rem; font-size: 16px; cursor: pointer;">Settings</button>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <div id="zoneCount">Loading games...</div>
-        <div id="container">Loading...</div>
-    </main>
-
-    <!-- THIS IS WHERE THE AD GOES — ONLY SHOWS WHEN A GAME IS OPEN -->
-    <div id="zoneViewer">
-        <div class="zone-header">
-            <div class="zone-title">
-                <h2 id="zoneName">Game</h2>
-                <span id="zoneId" style="display: none;"></span>
-                <a id="zoneAuthor" href="#" target="_blank">by Author</a>
-            </div>
-            <div class="zone-controls">
-                <button onclick="fullscreenZone()">Fullscreen</button>
-                <button onclick="aboutBlank()">Open in New Tab</button>
-                <button onclick="downloadZone()">Download</button>
-                <button onclick="closeZone()">Close</button>
-            </div>
-        </div>
-        <iframe id="zoneFrame"></iframe>
-
-        <!-- SINGLE AD BEHIND EVERY GAME -->
-        <div style="padding:15px 0 10px;text-align:center;background:rgba(0,0,0,0.35);">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-1037091401823825"
-                 data-ad-slot="5549138288"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+  <header>
+    <div class="header-content">
+      <div class="logo">homework bro bro</div>
+      <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search games..." oninput="filterZones()" />
+        <select id="sortOptions" onchange="sortZones()">
+          <option value="popular">Popular</option>
+          <option value="name">Name</option>
+          <option value="id">ID</option>
+        </select>
+      </div>
+      <div class="control-buttons">
+        <button id="settings">Settings</button>
+      </div>
     </div>
+  </header>
 
-    <div id="popupOverlay">
-        <!-- your popup code unchanged -->
+  <main>
+    <div id="zoneCount">Loading games...</div>
+    <div id="container">Loading...</div>
+  </main>
+
+  <!-- Game viewer + single ad -->
+  <div id="zoneViewer" style="display:none;">
+    <div class="zone-header">
+      <div class="zone-title">
+        <h2 id="zoneName">Game</h2>
+        <a id="zoneAuthor" href="#" target="_blank">by Author</a>
+      </div>
+      <div class="zone-controls">
+        <button onclick="fullscreenZone()">Fullscreen</button>
+        <button onclick="aboutBlank()">New Tab</button>
+        <button onclick="downloadZone()">Download</button>
+        <button onclick="closeZone()">Close</button>
+      </div>
     </div>
+    <iframe id="zoneFrame" sandbox="allow-scripts allow-same-origin allow-modals allow-popups"></iframe>
 
-    <footer>
-        <div class="footer-links">
-            <a href="#" onclick="showContact(); return false;">Contact</a>
-            <a href="#" onclick="loadPrivacy(); return false;">Privacy Policy</a>
-            <a href="javascript:saveData()">Export Data</a>
-            <label for="importData" style="color: var(--primary-color); cursor: pointer;">Import Data</label>
-            <input type="file" id="importData" style="display: none;" onchange="loadData(event)">
-        </div>
-    </footer>
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-1037091401823825"
+           data-ad-slot="1037091401823825"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- Footer with real Privacy link -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <button type="button" class="footer-link" onclick="showContact()">Contact</button>
+      
+      <a href="http://nikegtag.github.io/privacy.txt" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="footer-link">Privacy Policy</a>
+      
+      <button type="button" class="footer-link" onclick="saveData()">Export Data</button>
+      
+      <label class="footer-link" for="importData">
+        Import Data
+        <input type="file" id="importData" accept=".json" onchange="loadData(event)" hidden />
+      </label>
+    </div>
+    <small>© 2025 gn-math by nikegtag — math, unfiltered.</small>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
-

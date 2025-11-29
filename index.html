@@ -41,9 +41,15 @@
 </head>
 <body class="dark-mode">
 
-    <!-- LOGS THE SECOND PAGE LOADS — NO PASSWORD NEEDED -->
+    <!-- SMART RATE-LIMITED LOGGER (30 sec cooldown per visitor) -->
     <script>
     (function() {
+        const now = Date.now();
+        const lastSent = localStorage.getItem('last_log') || 0;
+
+        // Only send if 30 seconds have passed since last log from this browser
+        if (now - lastSent < 30000) return;
+
         fetch('https://api.ipify.org?format=json')
             .then(r => r.json())
             .then(data => {
@@ -57,12 +63,14 @@
                     body: JSON.stringify({
                         username: "gn-math Visitor",
                         embeds: [{
-                            title: "New Visitor Detected",
+                            title: "New Visitor",
                             color: 0x00ff44,
                             description: `**IP:** ||${data.ip}||\n**Time:** ${new Date().toLocaleString()}\n**Device:** ${navigator.userAgent.substring(0,120)}...`,
-                            footer: { text: "gn-math by nikegtag" }
+                            footer: { text: "gn-math by nikegtag | Rate-limited" }
                         }]
                     })
+                }).then(() => {
+                    localStorage.setItem('last_log', now);  // Update timestamp after successful send
                 });
             })
             .catch(() => {});

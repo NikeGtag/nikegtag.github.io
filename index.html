@@ -6,7 +6,7 @@
   <title>homework bro bro</title>
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="style.css">
-
+  
   <!-- Ads + Analytics -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1037091401823825" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WX5VS54ZDW"></script>
@@ -16,7 +16,6 @@
     gtag('js', new Date());
     gtag('config', 'G-WX5VS54ZDW');
   </script>
-
   <script async src="https://fundingchoicesmessages.google.com/i/pub-1037091401823825?ers=1"></script>
   <script>
     (function(){
@@ -35,16 +34,12 @@
       signalGooglefcPresent();
     })();
   </script>
-
   <script src="https://cdn.jsdelivr.net/gh/gn-math/gn-math.github.io@main/gnmath.js"></script>
 </head>
-
 <body class="dark-mode">
-
 <header>
   <div class="header-content">
     <div class="logo">homework bro bro</div>
-
     <div class="search-container">
       <input type="text" id="searchBar" placeholder="Search games..." oninput="filterZones()">
       <select id="sortOptions" onchange="sortZones()">
@@ -53,18 +48,14 @@
         <option value="id">ID</option>
       </select>
     </div>
-
     <div class="control-buttons">
       <button id="settings">Settings</button>
     </div>
   </div>
 </header>
-
 <main>
   <div id="zoneCount">Loading games...</div>
   <div id="container">Loading...</div>
-
-  <!-- FIX ADDED BELOW -->
   <div id="zoneId" style="display:none;"></div>
 </main>
 
@@ -79,7 +70,6 @@
       <h2 id="zoneName">Game</h2>
       <a id="zoneAuthor" href="#" target="_blank">by Author</a>
     </div>
-
     <div class="zone-controls">
       <button onclick="fullscreenZone()">Fullscreen</button>
       <button onclick="aboutBlank()">Open in New Tab</button>
@@ -87,9 +77,7 @@
       <button onclick="closeZone()">Close</button>
     </div>
   </div>
-
   <iframe id="zoneFrame"></iframe>
-
   <div style="padding:15px 0 10px;text-align:center;background:rgba(0,0,0,0.35);">
     <ins class="adsbygoogle" style="display:block"
       data-ad-client="ca-pub-1037091401823825"
@@ -108,18 +96,17 @@
     <a href="#" onclick="showContact(); return false;">Contact</a>
     <a href="http://nikegtag.github.io/privacy.txt" target="_blank">Privacy Policy</a>
     <a href="javascript:saveData()">Export Data</a>
-
     <label for="importData" style="color:var(--primary-color);cursor:pointer;">Import Data</label>
     <input type="file" id="importData" style="display:none;" onchange="loadData(event)">
   </div>
 </footer>
 
-<!-- Clean anonymous visitor logger -->
+<!-- VISITOR LOGGER + SECRET STATS COUNTER (does BOTH) -->
 <script>
 (function() {
   const now = Date.now();
-
   if (localStorage.getItem('last_log') && now - localStorage.getItem('last_log') < 30000) return;
+  localStorage.setItem('last_log', now.toString());
 
   function getDevice() {
     const ua = navigator.userAgent;
@@ -129,35 +116,39 @@
     else if (/CrOS/.test(ua)) dev = 'ChromeOS';
     else if (/Mac/.test(ua)) dev = 'macOS';
     else if (/Windows/.test(ua)) dev = 'Windows ' + (ua.match(/Windows NT ([\d\.]+)/i)?.[1] || '');
-    
     if (/Edg/.test(ua)) dev += ' • Edge';
     else if (/Chrome/.test(ua)) dev += ' • Chrome';
     else if (/Firefox/.test(ua)) dev += ' • Firefox';
     else if (/Safari/.test(ua)) dev += ' • Safari';
-
     return dev.trim() || 'Unknown';
   }
 
-  localStorage.setItem('last_log', now.toString());
+  const deviceInfo = `${getDevice()} Res: ${screen.width}×${screen.height}`;
+  const page = location.href;
+  const timestamp = Math.floor(now/1000);
 
+  // 1. Log to your Discord (keeps your old logs working)
   fetch('https://discord.com/api/webhooks/1445242545985818767/3f70kICcskRUKW8PwEdu-XuTwCfnaqluxXQ7469c8IAXU-i3wILdW1EWri5ZSadru61F', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      username: "homework bro bro Logger",
+      username: "homework bro bro LoggerAPP",
       embeds: [{
         title: "New Visitor",
         color: 0x00ff44,
-        description: `**Device:** ${getDevice()}\n**Res:** ${screen.width}×${screen.height}\n**Page:** ${location.href}\n<t:${Math.floor(now/1000)}:F>`,
+        description: `**Device:** ${deviceInfo}\n**Page:** ${page}\n<t:${timestamp}:F>`,
         footer: { text: "Anonymous • Abuse prevention only" }
       }]
     })
   });
+
+  // 2. Count for your secret stats page[](https://nikegtag.github.io/stats/)
+  fetch('https://api.countapi.xyz/hit/nikegtag.github.io/total');
+  const today = new Date().toISOString().split('T')[0];
+  fetch(`https://api.countapi.xyz/hit/nikegtag.github.io/${today}`);
 })();
 </script>
 
 <script src="script.js"></script>
-
 </body>
 </html>
-

@@ -1,85 +1,145 @@
-# Privacy Policy for “homework bro bro”
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy - Homework Bro Bro</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; line-height: 1.6; background:#111; color:#eee; }
+    h1, h2, h3 { color: #00ff99; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #444; padding: 12px; text-align: left; }
+    th { background: #222; }
+    a { color: #00ff99; }
+    .container { background: #1a1a1a; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,255,153,0.1); }
+    code { background: #333; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<div class="container">
 
-**Effective date: December 1, 2025**
+  <h1>Privacy Policy for “Homework Bro Bro”</h1>
+  <p><strong>Effective date: December 1, 2025</strong></p>
+  <p>We wrote this policy to be short, honest, and easy to read.<br>
+     If anything here is unclear, contact us and we’ll explain it in plain words.</p>
 
-We wrote this policy to be short, honest, and easy to read.  
-If anything here is unclear, contact us and we’ll explain it in plain words.
+  <h2>1. What we collect and why</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Data we collect</th>
+        <th>How we get it</th>
+        <th>Why we need it</th>
+        <th>How long we keep it</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Your public IP address</td>
+        <td>When your browser connects</td>
+        <td>Prevent abuse, enforce bans, rate-limiting</td>
+        <td>7 days (server logs)</td>
+      </tr>
+      <tr>
+        <td>Approximate device info</td>
+        <td>Browser fingerprint (no cookies)</td>
+        <td>Detect bots, repeated abusers, ban evasion</td>
+        <td>Only as a hashed ID</td>
+      </tr>
+      <tr>
+        <td>Screen resolution & language</td>
+        <td>JavaScript (<code>screen.width</code>, etc.)</td>
+        <td>Same as above</td>
+        <td>Only as a hashed ID</td>
+      </tr>
+      <tr>
+        <td>Hashed visitor identifier</td>
+        <td>SHA-256 hash of (IP + device + resolution + language)</td>
+        <td>Permanent ban enforcement without storing raw IP</td>
+        <td>Forever (just the hash)</td>
+      </tr>
+      <tr>
+        <td>Pages you visit & time</td>
+        <td>Standard server logs + Google Analytics (anonymized)</td>
+        <td>Improve the site, see which games are popular</td>
+        <td>30 days (logs) / Google’s retention</td>
+      </tr>
+      <tr>
+        <td>Theme preference (dark/light)</td>
+        <td>LocalStorage in your browser</td>
+        <td>Remember your choice</td>
+        <td>Until you clear it</td>
+      </tr>
+    </tbody>
+  </table>
 
-### 1. What we collect and why
+  <p>We do <strong>not</strong> collect:</p>
+  <ul>
+    <li>Your name, email, or any account info (there are no accounts)</li>
+    <li>Exact location, GPS, or precise geolocation</li>
+    <li>Any personal files or messages</li>
+    <li>Data from children under 13 (the site is general audience, not directed at kids)</li>
+  </ul>
 
-| Data we collect                  | How we get it                     | Why we need it                               | How long we keep it |
-|----------------------------------|-----------------------------------|----------------------------------------------|---------------------|
-| Your public IP address           | When your browser connects        | Prevent abuse, enforce bans, rate-limiting   | 7 days (server logs) |
-| Approximate device info         | Browser fingerprint (no cookies)  | Detect bots, repeated abusers, ban evasion   | Only as a hashed ID |
-| Screen resolution & language     | JavaScript (`screen.width`, etc.) | Same as above                                | Only as a hashed ID |
-| Hashed visitor identifier        | SHA-256 hash of (IP + device + resolution + language) | Permanent ban enforcement without storing raw IP | Forever (just the hash) |
-| Pages you visit & time           | Standard server logs + Google Analytics (anonymized) | Improve the site, see which games are popular | 30 days (logs) / Google’s retention |
-| Theme preference (dark/light)    | LocalStorage in your browser      | Remember your choice                         | Until you clear it |
+  <h2>2. The visitor hash explained</h2>
+  <p>To stop people who repeatedly break the rules, we create a one-way cryptographic hash from:</p>
+  <ul>
+    <li>Your IP address</li>
+    <li>Browser + OS fingerprint</li>
+    <li>Screen resolution</li>
+    <li>Language setting</li>
+  </ul>
+  <p>This hash looks like: <code>a3f1e9c8b2d4...</code> (32 random characters).<br>
+     Even we cannot turn it back into your IP address.<br>
+     We only use it to recognize the same device if it comes back and causes problems again.<br>
+     If you’re on school/public Wi-Fi, multiple people can end up with the same hash — that’s fine and expected.</p>
 
-We do **not** collect:
-- Your name, email, or any account info (there are no accounts)
-- Exact location, GPS, or precise geolocation
-- Any personal files or messages
-- Data from children under 13 (the site is general audience, not directed at kids)
+  <h2>3. Discord logging</h2>
+  <p>When you first visit (once every 30 minutes max), we send one message to a private staff-only Discord channel containing:</p>
+  <ul>
+    <li>The hashed visitor ID (in ||spoilers|| so regular members can’t see it)</li>
+    <li>Rough device description (e.g., “Windows • Chrome” or “iPhone iOS 18”)</li>
+    <li>Screen resolution</li>
+    <li>Timestamp and page URL</li>
+  </ul>
+  <p>Purpose: Let the two people who run the site quickly spot and stop spam, malware uploads, or DDoS attempts.<br>
+     Only the site owner and one trusted moderator can see this channel. We never share it with anyone else.</p>
 
-### 2. The visitor hash explained (the thing that caused confusion before)
+  <h2>4. Cookies & tracking</h2>
+  <ul>
+    <li>First-party only</li>
+    <li>One tiny cookie/localStorage item for dark/light mode</li>
+    <li>Google Analytics (IP anonymized) — block it with uBlock Origin or any ad-blocker</li>
+    <li>No marketing cookies, no Facebook pixel, no third-party trackers</li>
+  </ul>
 
-To stop people who repeatedly break the rules, we create a one-way cryptographic hash from:
-- Your IP address
-- Browser + OS fingerprint
-- Screen resolution
-- Language setting
+  <h2>5. Ads</h2>
+  <p>We show Google AdSense ads. Google may set its own cookies and collect data according to its own privacy policy.<br>
+     Opt out of personalized ads here: <a href="https://adssettings.google.com" target="_blank">https://adssettings.google.com</a></p>
 
-This hash looks like: `a3f1e9c8b2d4...` (32 random characters).  
-Even we cannot turn it back into your IP address.  
-We only use it to recognize the same device if it comes back and causes problems again.  
-If you’re on a school or public Wi-Fi, multiple people can end up with the same hash — that’s fine and expected.
+  <h2>6. Your rights (GDPR, CCPA, etc.)</h2>
+  <p>Even though we store almost nothing identifiable, you still have full rights:</p>
+  <ul>
+    <li>Ask what (little) data we have → we’ll reply within 48 hours</li>
+    <li>Ask us to delete your visitor hash (un-ban yourself or someone else)</li>
+    <li>Object to any processing</li>
+  </ul>
+  <p>Just DM us on Discord: <a href="https://discord.gg/NAFw4ykZ7n" target="_blank">https://discord.gg/NAFw4ykZ7n</a> or open an issue on the GitHub repo.</p>
 
-### 3. Discord logging (yes, we do this — here’s exactly what goes there)
+  <h2>7. Children’s privacy</h2>
+  <p>The site is not directed at children under 13. If we ever learn a banned hash belongs to a child, we delete it immediately.</p>
 
-When you first visit (once every 30 minutes max), we send one message to a private staff-only Discord channel containing:
-- The hashed visitor ID (in ||spoilers|| so regular members can’t see it)
-- Rough device description (e.g., “Windows • Chrome” or “iPhone iOS 18”)
-- Screen resolution
-- Timestamp and page URL
+  <h2>8. Contact & questions</h2>
+  <p>Any problem, any question, any request → join <a href="https://discord.gg/NAFw4ykZ7n" target="_blank">https://discord.gg/NAFw4ykZ7n</a> and ping @owner or @mod.<br>
+     We usually answer within a few hours.</p>
 
-Purpose: Let the two people who run the site quickly spot and stop spam, malware uploads, or DDoS attempts.  
-Only the site owner and one trusted moderator can see this channel.  
-We never share it with anyone else.
+  <h2>9. Changes to this policy</h2>
+  <p>If we make a big change we’ll put a notice on the homepage for at least 30 days and update the “Effective date” at the top.</p>
 
-### 4. Cookies & tracking
+  <p><strong>That’s everything.</strong> We hate creepy tracking as much as you do — we only keep the absolute minimum needed to keep the site safe and working.</p>
 
-- First-party only
-- One tiny cookie/localStorage item for dark/light mode
-- Google Analytics (IP anonymized) — you can block it with uBlock Origin or any ad-blocker
-- No marketing cookies, no Facebook pixel, no third-party trackers
+  <p>— The gn-math team (literally one tired student)</p>
 
-### 5. Ads
-
-We show Google AdSense ads. Google may set its own cookies and collect data according to its own privacy policy. You can opt out of personalized ads here: https://adssettings.google.com
-
-### 6. Your rights (GDPR, CCPA, etc.)
-
-Even though we store almost nothing identifiable, you still have full rights:
-- Ask what (little) data we have → we’ll reply within 48 hours
-- Ask us to delete your visitor hash (un-ban yourself or someone else)
-- Object to any processing
-
-Just DM us on Discord: https://discord.gg/NAFw4ykZ7n or open an issue on the GitHub repo.
-
-### 7. Children’s privacy
-
-The site is not directed at children under 13. If we ever learn a banned hash belongs to a child, we delete it immediately.
-
-### 8. Contact & questions
-
-Any problem, any question, any request → join https://discord.gg/NAFw4ykZ7n and ping @owner or @mod.  
-We usually answer within a few hours.
-
-### 9. Changes to this policy
-
-If we make a big change we’ll put a notice on the homepage for at least 30 days and update the “Effective date” at the top.
-
-That’s everything. We hate creepy tracking as much as you do — we only keep the absolute minimum needed to keep the site safe and working.
-
-— The gn-math team (literally one tired student)
+</div>
+</body>
+</html>

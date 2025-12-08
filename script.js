@@ -4,7 +4,7 @@
         const searchBar = document.getElementById('searchBar');
         const sortOptions = document.getElementById('sortOptions');
         // https://www.jsdelivr.com/tools/purge
-        const zonesURL =  "https://raw.githubusercontent.com/NikeGtag/data/main/games.json";
+        const zonesURL =  "https://raw.githubusercontent.com/PreToastedSandwich/data/main/games.json";
         const coverURL = "https://raw.githubusercontent.com/NikeGtag/covers/main";
         const htmlURL = "https://raw.githubusercontent.com/NikeGtag/html/main";
         let zones = [];
@@ -299,6 +299,7 @@
         }
 
         listZones();
+
 
 
 

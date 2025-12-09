@@ -393,7 +393,7 @@
 <body class="dark-mode">
     <header>
         <div class="header-content">
-            <div class="logo">gn-math</div>
+            <div class="logo">homework bro bro</div>
             <div class="search-container">
                 <input type="text" id="searchBar" placeholder="Search games..." oninput="filterZones()">
                 <select id="sortOptions" onchange="sortZones()">
@@ -459,9 +459,9 @@
         const searchBar = document.getElementById('searchBar');
         const sortOptions = document.getElementById('sortOptions');
         // https://www.jsdelivr.com/tools/purge
-        const zonesURL = "https://cdn.jsdelivr.net/gh/gn-math/assets@main/zones.json";
-        const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
-        const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
+        const zonesURL = "https://raw.githubusercontent.com/PreToastedSandwich/data/main/games.json";
+        const coverURL = "https://raw.githubusercontent.com/PreToastedSandwich/covers/main";
+        const htmlURL = "https://raw.githubusercontent.com/PreToastedSandwich/html/main";
         let zones = [];
         let popularityData = {};
         async function listZones() {
